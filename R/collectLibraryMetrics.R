@@ -394,7 +394,7 @@ collectLibraryStats <- function(folder){
 		row=data.frame(file=basename(file),complexity=complexity,coverage=coverage,spikiness=spikiness,entropy=entropy)
 		met=rbind(met,row)
 	}
-	write.table(met,paste0(basename(folder),".txt"),sep="\t",quote=F,row.names = F,col.names = T)
+	write.table(met,paste0("Input/NewMetrics/",basename(folder),".txt"),sep="\t",quote=F,row.names = F,col.names = T)
 }
 
 collectLibraryStats("../ALL_BAM_FILES/")
