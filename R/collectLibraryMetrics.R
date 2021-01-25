@@ -397,12 +397,9 @@ collectLibraryStats <- function(folder){
 	write.table(met,paste0(basename(folder),".txt"),sep="\t",quote=F,row.names = F,col.names = T)
 }
 
-collectLibraryStats("JAN_2021_BAM/")
+collectLibraryStats("../ALL_BAM_FILES/")
 
 
-one$sum=abs(one$mcounts-one$pcounts)/one$counts
-sum(na.omit(one$sum))/nrow(na.omit(one))
-ggplot(one) + geom_point(aes(start,mcounts,color="red"))+geom_point(aes(start,pcounts,color="blue"))+labs(title=sum(na.omit(one$sum))/nrow(na.omit(one)))
 
 
 
