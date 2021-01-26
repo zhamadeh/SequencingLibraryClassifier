@@ -7,7 +7,7 @@ library(GenomeInfoDb)
 library(GenomicRanges)
 BiocManager::install("Rsamtools")
 library(Rsamtools)
-#collectLibraryStats("../../Downloads/aneufinder-master/backupBAM/")
+#collectLibraryStats("../../Downloads/aneufinder-master/BAM/")
 args = commandArgs(trailingOnly=TRUE)
 
 
