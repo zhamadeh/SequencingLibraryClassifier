@@ -5,7 +5,7 @@ library(bamsignals)
 library(GenomeInfoDb)
 library(GenomicRanges)
 #collectLibraryStats("../../Downloads/aneufinder-master/backupBAM/")
-
+args = commandArgs(trailingOnly=TRUE)
 
 
 qc.spikiness <- function(counts) {
@@ -397,9 +397,7 @@ collectLibraryStats <- function(folder){
 	write.table(met,paste0("Input/NewMetrics/",basename(folder),".txt"),sep="\t",quote=F,row.names = F,col.names = T)
 }
 
-collectLibraryStats("../ALL_LAB_BAM_FILES/")
-
-
+collectLibraryStats(args[1])
 
 
 
