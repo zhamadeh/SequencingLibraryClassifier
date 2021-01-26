@@ -397,7 +397,7 @@ collectLibraryStats <- function(folder){
 	write.table(met,paste0("Input/NewMetrics/",basename(folder),".txt"),sep="\t",quote=F,row.names = F,col.names = T)
 }
 
-collectLibraryStats("../ALL_BAM_FILES/")
+collectLibraryStats("../ALL_LAB_BAM_FILES/")
 
 
 
