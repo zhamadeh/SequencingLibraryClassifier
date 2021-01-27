@@ -1,4 +1,4 @@
-Rscript R/collectLibraryMetrics.R "../../../projects/lansdorp/sequence_data/BAM_zeid_quality/aug27/"
+Rscript R/collectLibraryMetrics.R "../../../projects/lansdorp/sequence_data/zeid_jan21/"
 #Rscript R/collectLibraryMetrics.R "../../../projects/lansdorp/sequence_data/BAM_zeid_quality/dec4/"
 #Rscript R/collectLibraryMetrics.R "../../../projects/lansdorp/sequence_data/BAM_zeid_quality/jul15/"
 #Rscript R/collectLibraryMetrics.R "../../../projects/lansdorp/sequence_data/BAM_zeid_quality/jun26/"
