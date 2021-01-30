@@ -53,7 +53,7 @@ message("All together, there are now ",nrow(metrics), " libraries with ", ncol(m
 
 #Convert percentages to strings and then string splitting, then back to numeric
 for (colname in colnames(metrics)){
-	if (grepl( "%", as.character(metrics[,colname][50]), fixed = TRUE)){
+	if (grepl( "%", as.character(metrics[,colname][50]), fixed = TRUE)){ ######### whats the [50] for??
 		metrics[,colname] <- as.character(metrics[,colname])
 		metrics[,colname] <- str_remove(metrics[,colname],"%")
 		metrics[,colname]<-as.numeric(metrics[,colname])
