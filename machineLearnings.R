@@ -88,14 +88,14 @@ metrics=select(metrics,-c(Library))
 
 for (row in 1:nrow(metrics)){
 	if (metrics[row,]$Quality=="acceptable" | metrics[row,]$Quality=="a" ){
-		metrics[row,]$Quality<- "poor"
+		metrics[row,]$Quality<- "good"
 	} else if (metrics[row,]$Quality=="brdu" | metrics[row,]$Quality=="b" ){
-		metrics[row,]$Quality="poor"
+		metrics[row,]$Quality="brdu"
 	} else if (metrics[row,]$Quality=="p"){
 		metrics[row,]$Quality="poor"
-	}else if (metrics[row,]$Quality=="shallow"){
-		metrics[row,]$Quality="poor"
-	}
+	}#else if (metrics[row,]$Quality=="shallow"){
+		#metrics[row,]$Quality="poor"
+	#}
 }
 
 metrics$Quality <- droplevels.factor(metrics$Quality)
@@ -143,25 +143,26 @@ scales <- list(x=list(relation="free"), y=list(relation="free"))
 
 ################## Training models ##################
 
-control <- trainControl(method="repeatedcv", number=10,classProbs = T,summaryFunction = twoClassSummary, repeats = 5,)
-metric <- "Sens"
+control <- trainControl(method="cv", number=10,classProbs = T)
+metric <- "Accuracy"
 
 #Linear (lda), non-linear(CART,kNN), advanced
-#models=c("lda","rpart","knn","svmRadial","rf","gbm")
-#for (model in models){
-#	set.seed(7)
-#	fit <- train(Quality~., data=trainData, method=model, metric=metric, trControl=control)
-#	assign(paste0("fit.",model),fit)
+models=c("lda","rpart","knn","svmRadial","rf","gbm")
+for (model in models){
+	set.seed(7)
+	fit <- train(Quality~., data=trainData, method=model, metric=metric, trControl=control)
+	assign(paste0("fit.",model),fit)
 	#results=resamples(list(get(paste0("fit.",model))))
-#}
+}
 #trainData=select(trainData,-c( Reads_per_Mb, Mode_GC, Mode_insert_size ,Sequencing_for_0.05x_cov))
 #testData=select(testData,-c( Reads_per_Mb, Mode_GC, Mode_insert_size ,Sequencing_for_0.05x_cov))
-set.seed(7)
-fit.gbm =  train(Quality~., data=trainData, method="gbm", metric=metric, trControl=control)
+#set.seed(7)
+#fit.gbm =  train(Quality~., data=trainData, method="gbm", metric=metric, trControl=control)
 
-#results <- resamples(list(lda=fit.lda,rpart=fit.rpart,knn=fit.knn,svmRadial=fit.svmRadial,rf=fit.rf,gbm=fit.gbm))
-#summary(results)
-#dotplot(results)
+results <- resamples(list(lda=fit.lda,rpart=fit.rpart,knn=fit.knn,svmRadial=fit.svmRadial,rf=fit.rf,gbm=fit.gbm))
+summary(results)
+dotplot(results)
+fit.rf
 #default_knn_mod = train(Quality ~ .,data = trainData,method = "knn",trControl = trainControl(method = "cv", number = 5),preProcess = c("center", "scale"),tuneGrid = expand.grid(k = seq(1, 101, by = 2)))
 #fit.gbm.imp <- varImp(fit.gbm)
 #plot(fit.rf.imp, main="Variable Importance with Random Forest")
